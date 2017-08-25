@@ -1,0 +1,27 @@
+<%= form_with(model: nerd, local: true) do |form| %>
+  <% if nerd.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(nerd.errors.count, "error") %> prohibited this nerd from being saved:</h2>
+
+      <ul>
+      <% nerd.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :nerd_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hobby %>
+    <%= form.text_field :hobby, id: :nerd_hobby %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

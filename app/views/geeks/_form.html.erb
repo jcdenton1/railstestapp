@@ -1,0 +1,27 @@
+<%= form_with(model: geek, local: true) do |form| %>
+  <% if geek.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(geek.errors.count, "error") %> prohibited this geek from being saved:</h2>
+
+      <ul>
+      <% geek.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :geek_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hobby %>
+    <%= form.text_field :hobby, id: :geek_hobby %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
