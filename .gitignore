@@ -13,8 +13,14 @@
 !/log/.keep
 !/tmp/.keep
 
-/node_modules
+node_modules
+client/node_modules
+.idea
 /yarn-error.log
 
 .byebug_history
-.idea
+
+npm-debug.log*
+
+# Generated js bundles
+/public/webpack/*
