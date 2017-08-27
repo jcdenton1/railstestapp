@@ -15,6 +15,8 @@
 
 node_modules
 client/node_modules
+client/yarn.lock
+client/package-lock.json
 .idea
 /yarn-error.log
 

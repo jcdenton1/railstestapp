@@ -12,6 +12,16 @@ const configPath = resolve('..', 'config');
 const { devBuild, manifest, webpackOutputPath, webpackPublicOutputDir } =
   webpackConfigLoader(configPath);
 
+var setupDomainUrl = function() {
+  switch(process.env.NODE_ENV) {
+    case 'production':
+      return "";
+    case 'development':
+    default:
+      return "'http://admin:3000'";
+  }
+};
+
 const config = {
 
   context: resolve(__dirname),
@@ -21,7 +31,8 @@ const config = {
       'es5-shim/es5-shim',
       'es5-shim/es5-sham',
       'babel-polyfill',
-      './app/bundles/HelloWorld/startup/registration',
+      'bootstrap-loader',
+      './app/bundles/SampleApp/startup/registration',
     ],
   },
 
@@ -44,6 +55,13 @@ const config = {
       DEBUG: false,
     }),
     new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
+    new webpack.DefinePlugin({
+      DOMAIN_URL: setupDomainUrl()
+    }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    })
   ],
 
   module: {
@@ -62,6 +80,14 @@ const config = {
         test: /\.jsx?$/,
         use: 'babel-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        loader: 'url-loader?limit=100000'
       },
     ],
   },

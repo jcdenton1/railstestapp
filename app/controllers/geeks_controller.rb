@@ -5,6 +5,7 @@ class GeeksController < ApplicationController
   # GET /geeks.json
   def index
     @geeks = Geek.all
+    render json: @geeks
   end
 
   # GET /geeks/1

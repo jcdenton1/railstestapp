@@ -5,6 +5,7 @@ class NerdsController < ApplicationController
   # GET /nerds.json
   def index
     @nerds = Nerd.all
+    render json: @nerds
   end
 
   # GET /nerds/1
